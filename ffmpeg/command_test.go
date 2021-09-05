@@ -38,7 +38,7 @@ func TestCommand_Render(t *testing.T) {
 				Height:   1080,
 				Duration: MustParseDuration("60.0s"),
 				Filters: []ffmpeg.Filter{
-					ffmpeg.DrawTextFilter{
+					ffmpeg.DrawtextFilter{
 						Value: "I’m sOoOo good at this game! xD",
 						X:     200,
 						Y:     100,
@@ -60,7 +60,7 @@ func TestCommand_Render(t *testing.T) {
 				Height:   1080,
 				Duration: MustParseDuration("60.0s"),
 				Filters: []ffmpeg.Filter{
-					ffmpeg.DrawTextFilter{
+					ffmpeg.DrawtextFilter{
 						Value: "Brutal, Savage, Rekt",
 						X:     0,
 						Y:     0,

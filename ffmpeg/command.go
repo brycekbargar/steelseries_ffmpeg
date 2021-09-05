@@ -1,10 +1,15 @@
 package ffmpeg
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"time"
 )
+
+var ErrInvalidFilterEndTime = errors.New("invalid end time")
+var ErrInvalidFilterStartTime = errors.New("invalid start time")
+var ErrInvalidFilterLocation = errors.New("invalid x,y coordinate")
 
 // FilePath is a path to a file on disk.
 type FilePath string

@@ -6,12 +6,14 @@ import (
 	"time"
 )
 
-type DrawTextFilter struct {
+// DrawtextFilter represents the collection of parameters necessary to add a an ffmpeg 'drawtext' filter to a video.
+type DrawtextFilter struct {
 	Value             string
 	X, Y, Size, Color uint
 	Start, End        float64
 }
 
+// AddDrawtextFilter creates a valid ffmpeg 'drawtext' filter and adds it to the command.
 func (c *Command) AddDrawtextFilter(
 	value string,
 	location struct{ X, Y uint },
@@ -30,7 +32,7 @@ func (c *Command) AddDrawtextFilter(
 		return err
 	}
 
-	f := &DrawTextFilter{
+	f := &DrawtextFilter{
 		Value: value,
 		X:     location.X,
 		Y:     location.Y,
@@ -39,13 +41,22 @@ func (c *Command) AddDrawtextFilter(
 		Start: s.Seconds(),
 		End:   e.Seconds(),
 	}
-	// Validate(f)
+	if f.Start > c.Duration.Seconds() {
+		return ErrInvalidFilterStartTime
+	}
+	if f.End > c.Duration.Seconds() {
+		return ErrInvalidFilterEndTime
+	}
+	if f.X > c.Width || f.Y > c.Height {
+		return ErrInvalidFilterLocation
+	}
 
 	c.Filters = append(c.Filters, f)
 	return nil
 }
 
-func (f DrawTextFilter) Render(out io.Writer) error {
+// Render writes the ffmpeg 'drawtext' filter string to the io.Writer.
+func (f DrawtextFilter) Render(out io.Writer) error {
 	_, err := fmt.Fprintf(
 		out,
 		"drawtext = enable='between(t,%.1f,%.1f)':text='%v':fontcolor=0x%06X:fontsize=%d:x=%d:y=%d",
