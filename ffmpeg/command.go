@@ -9,6 +9,11 @@ import (
 // FilePath is a path to a file on disk.
 type FilePath string
 
+// Filter is a ffmpeg filter that can be rendered to an io.Writer.
+type Filter interface {
+	Render(io.Writer) error
+}
+
 // Command contains context about a video to run through ffmpeg.
 type Command struct {
 	// Input is the location of the video file on disk.
@@ -21,6 +26,8 @@ type Command struct {
 	Height uint
 	// Duration is the length of the video.
 	Duration time.Duration
+	// Filters is the slice of filters to apply as part of the command.
+	Filters []Filter
 }
 
 // NewCommand creates (and todo validates) the basic metadata for an ffmpeg command.
@@ -28,7 +35,8 @@ func NewCommand(
 	input FilePath,
 	output FilePath,
 	resolution struct{ X, Y uint },
-	duration string) (*Command, error) {
+	duration string,
+) (*Command, error) {
 
 	d, err := time.ParseDuration(duration)
 	if err != nil {
@@ -41,6 +49,7 @@ func NewCommand(
 		Width:    resolution.X,
 		Height:   resolution.Y,
 		Duration: d,
+		Filters:  make([]Filter, 0),
 	}
 
 	// return Validate(c)
@@ -54,7 +63,30 @@ func (c Command) Render(out io.Writer) error {
 		return err
 	}
 
-	_, err = fmt.Fprintf(out, "%v", c.Output)
+	if len(c.Filters) > 0 {
+		_, err = fmt.Fprint(out, "-vf \"")
+		if err != nil {
+			return err
+		}
+
+		for i, f := range c.Filters {
+			if i != 0 {
+				_, err = fmt.Fprint(out, ", ")
+				if err != nil {
+					return err
+				}
+			}
+
+			err = f.Render(out)
+			if err != nil {
+				return err
+			}
+		}
+
+		_, err = fmt.Fprint(out, "\" ")
+	}
+
+	_, err = fmt.Fprint(out, c.Output)
 	if err != nil {
 		return err
 	}
