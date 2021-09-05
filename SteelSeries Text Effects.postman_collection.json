@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "b776dce8-33e4-482d-883c-112c4670033e",
+		"name": "SteelSeries Text Effects",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}",
+					"host": [
+						"{{server}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test #1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Video\": {\r\n        \"Input\": \"test_input1.mp4\",\r\n        \"Duration\": \"60.0s\",\r\n        \"Resolution\": {\r\n            \"X\": 1920,\r\n            \"Y\": 1080\r\n        },\r\n        \"Output\": \"test_output1.mp4\"\r\n    },\r\n    \"TextEffect\": {\r\n        \"Text\": \"I’m sOoOo good at this game! xD\",\r\n        \"X\": 200,\r\n        \"Y\": 100,\r\n        \"FontSize\": 64,\r\n        \"FontColor\": \"FFFFFF\",\r\n        \"Start\": \"23.0s\",\r\n        \"End\": \"40.0s\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/api/texteffects",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"texteffects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test #2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Video\": {\r\n        \"Input\": \"test_input2.mp4\",\r\n        \"Duration\": \"60.0s\",\r\n        \"Resolution\": {\r\n            \"X\": 1920,\r\n            \"Y\": 1080\r\n        },\r\n        \"Output\": \"test_output2.mp4\"\r\n    },\r\n    \"TextEffect\": {\r\n        \"Text\": \"Brutal, Savage, Rekt\",\r\n        \"X\": 0,\r\n        \"Y\": 0,\r\n        \"FontSize\": 48,\r\n        \"FontColor\": \"000000\",\r\n        \"Start\": \"0.0s\",\r\n        \"End\": \"60.0s\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/api/texteffects",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"texteffects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test #3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Video\": {\r\n        \"Input\": \"test_input3.mp4\",\r\n        \"Duration\": \"60.0s\",\r\n        \"Resolution\": {\r\n            \"X\": 1920,\r\n            \"Y\": 1080\r\n        },\r\n        \"Output\": \"test_output3.mp4\"\r\n    },\r\n    \"TextEffect\": {\r\n        \"Text\": \"RIP\",\r\n        \"X\": 100,\r\n        \"Y\": 200,\r\n        \"FontSize\": 32,\r\n        \"FontColor\": \"FFFFFF\",\r\n        \"Start\": \"24.0s\",\r\n        \"End\": \"75.0s\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/api/texteffects",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"texteffects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test #4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Video\": {\r\n        \"Input\": \"test_input4.mp4\",\r\n        \"Duration\": \"60.0s\",\r\n        \"Resolution\": {\r\n            \"X\": 1920,\r\n            \"Y\": 1080\r\n        },\r\n        \"Output\": \"test_output1.mp4\"\r\n    },\r\n    \"TextEffect\": {\r\n        \"Text\": \"RIP\",\r\n        \"X\": 100,\r\n        \"Y\": 9999,\r\n        \"FontSize\": 48,\r\n        \"FontColor\": \"777777\",\r\n        \"Start\": \"24.0s\",\r\n        \"End\": \"48.0s\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/api/texteffects",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"texteffects"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:4123"
+		}
+	]
+}
